@@ -1,4 +1,4 @@
-package com.example.spinner
+package com.devops.spinner_app
 
 import io.flutter.embedding.android.FlutterActivity
 
