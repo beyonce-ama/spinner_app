@@ -38,13 +38,25 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
 @override
 Widget build(BuildContext context) {
+  final Brightness brightness = MediaQuery.of(context).platformBrightness;
+  final bool isDarkMode = brightness == Brightness.dark;
+
   return CupertinoPageScaffold(
     child: Stack(
       children: [
-        SizedBox(
+        // Background
+        Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-        
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: isDarkMode
+                  ? [Colors.black, Colors.deepPurple.shade900]
+                  : [Colors.deepPurple.shade100, Colors.white],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
           child: SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -57,6 +69,7 @@ Widget build(BuildContext context) {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
+                      color: isDarkMode ? CupertinoColors.white : Colors.deepPurple.shade800,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -67,6 +80,7 @@ Widget build(BuildContext context) {
                       "Not sure what to choose? Let Spinner decide for you!",
                       style: TextStyle(
                         fontSize: 18,
+                        color: isDarkMode ? CupertinoColors.systemGrey4 : Colors.deepPurple.shade700,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -87,6 +101,7 @@ Widget build(BuildContext context) {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
+                      color: isDarkMode ? CupertinoColors.systemGrey4 : Colors.deepPurple.shade700,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -98,6 +113,7 @@ Widget build(BuildContext context) {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
+                        color: isDarkMode ? CupertinoColors.systemGrey3 : Colors.deepPurple.shade600,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -116,6 +132,7 @@ Widget build(BuildContext context) {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
+                color: isDarkMode ? Colors.black54 : Colors.white.withOpacity(0.8), // Adjust color
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -127,6 +144,7 @@ Widget build(BuildContext context) {
               ),
               child: Icon(
                 CupertinoIcons.info_circle_fill,
+                color: isDarkMode ? Colors.white : Colors.deepPurple,
                 size: 28,
               ),
             ),
